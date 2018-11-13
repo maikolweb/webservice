@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">  
+    <head>    
+        <title>Título de la WEB</title>    
+        <meta charset="UTF-8">
+        <meta name="title" content="Título de la WEB">
+        <meta name="description" content="Descripción de la WEB">    
+
+        <script type="text/javascript" src="math.min.js"></script>
+    </head>  
+    <body>    
+
+        <input type="text" name="fraccion" id="fraccion" />
+        <button id="boton">calcular</button>
+        <div class="result" style="width:100px;height:20px; border:1px solid #000;color:red;margin:10px;"></div>
+
+
+        <script>
+            math.config({
+                number: 'Fraction' // Default type of number:
+                        // 'number' (default), 'BigNumber', or 'Fraction'
+            })
+            var input = document.getElementById("boton");
+            function numeroFraccion() {
+                var numero = document.getElementById("fraccion").value;
+
+                //numero capturado del input math.eva para transformar en decimal
+                var decimal = math.eval(numero);
+                //numero aleatorio para hacer la operacion math.eva para transformar en decimal
+                var resta = math.eval("1/48");
+
+                //se imprime redondeado a fraccion cada variable
+                printRatio(decimal);
+                //se imprime redondeado a fraccion cada variable
+                printRatio(resta);
+                //ya trasformados en decimal se realiza operacion que se desee
+                var total = decimal * resta;
+                //se imprime el total pero se debe meter math.fraction para que funcione el redondeo
+                var result = math.fraction(total);
+                //se da formato al decimal resulatnte metiendo lo en el math.format(, -> esto por defecto{fraction: 'ratio'}
+                var formato = math.format(result, {fraction: 'ratio'})
+                
+                //se  imprime el valor resultante
+                console.log("resultado ---> :"+formato);
+            //las funciones mencionadas es para que realice el console.log en un a funcion dandole formato ya es al gusto
+
+            }
+            input.addEventListener("click", numeroFraccion);
+
+
+            function printRatio(value) {
+                console.log(math.format(value, {fraction: 'ratio'}))
+            }
+
+            function print(value) {
+                console.log(math.format(value, {fraction: 'decimal'}))
+            }
+
+        </script>
+
+    </body>  
+</html>
